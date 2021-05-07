@@ -128,7 +128,7 @@ public class MPDPanel extends AnalysePanel
 
     private void initAction()
     {
-        saveGraphic = new BasicAction(null,
+        saveGraphic = new BasicAction(Utilities.getLangueMessage ("sauvegarde_png"),
                 Utilities.getLangueMessage(Constantes.MESSAGE_SAUVEGARDER_FICHIER_PNG), "SAVE_GRAPH",
                 GUIUtilities.getImageIcon(Constantes.FILE_PNG_SAVE), 0, null);
         saveGraphic.addActionListener(actionHandler);

@@ -66,8 +66,9 @@ public class SQLCommand {
 
 	private List<String> typesWithoutSize;
 
-    // Syntaxes SQL disponibles
-    public enum SQLsyntax { MySQL, PostgreSQL, OracleDB}
+    /* Syntaxes SQL disponibles */
+	/* Yalou! - 2021 : Ajout de MSSQL */
+    public enum SQLsyntax { MySQL, PostgreSQL, OracleDB, MSSQL}
 
     public SQLCommand() {
 		observableSQL = new ObservableSQL();
@@ -189,6 +190,10 @@ public class SQLCommand {
 		types.add("VARCHAR2");
 		types.add("BINARY_FLOAT");
 		types.add("BINARY_DOUBLE");
+
+		// Yalou! - 2021 pour l'équivalent LONGTEXT CHEZ MSSQL */
+		types.add("NVARCHAR");
+		types.add("NVARCHAR(MAX)");
 	    
 	    // les types sans taille
 		typesWithoutSize = new ArrayList<String>();

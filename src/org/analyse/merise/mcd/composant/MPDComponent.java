@@ -210,6 +210,15 @@ public class MPDComponent extends ZGraphique {
                     type = defautType;
                 }
 
+                /* Yalou - 2021 : correction bug #29 (git) types à **NOT FOUND** sur les foreing keys */
+                if (type=="**NOT FOUND**") {
+                    try {
+                        type = (String) data.getValue(info, DictionnaireTable.TYPE);
+                    } catch (Exception ex) {
+                        type = defautType;
+                    }
+                }
+
                 // PostgreSQL specific auto increment: SERIAL
                 if (premier_auto_increment && sqlSyntax.equals(SQLCommand.SQLsyntax.PostgreSQL.toString())) {
                     if(type.equals(Constantes.INT)) {
@@ -264,9 +273,15 @@ public class MPDComponent extends ZGraphique {
                         info = Utilities.normaliseString(info, Constantes.LOWER);
 			            type = "INT";
                     }   // evite de se retrouver avec AUTO_INCREMENT sur une clé étrangère
-
                 }
                 
+                // Yalou! - 2021 MSSQL: convert LONGTEXT to NVARCHAR(MAX)
+                if (sqlSyntax.equals(SQLCommand.SQLsyntax.MSSQL.toString())) {
+                    if (type.equals("LONGTEXT")) {
+                        type = "NVARCHAR(MAX)" ;
+                    }
+                }
+
                 //info = Utilities.normaliseString(info, Constantes.LOWER);  // Bug #622229
                 text += info + " " + type;
 
@@ -301,6 +316,11 @@ public class MPDComponent extends ZGraphique {
                             //text += " NOT NULL";
                         }
                     }
+                }
+
+                /* Yalou! - 2021 : Auto Increment pour MSSQL */
+                if (premier_auto_increment && sqlSyntax.equals(SQLCommand.SQLsyntax.MSSQL.toString())) {
+                    text += " " + Constantes.AUTO_INCREMENT_MSSQL;
                 }
 
                 if (e2.hasNext()) {

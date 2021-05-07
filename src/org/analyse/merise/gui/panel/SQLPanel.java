@@ -242,6 +242,9 @@ public class SQLPanel extends AnalysePanel
 				
 			}
 
+		/* Yalou! - 2021 : On enlève un retour chariot inutile */
+		textFinal = textFinal.replace("1,<br/>1", "1,1") ;
+
 		textFinal += "</pre></body></html>";
 		textFinal = textFinal.replace("<br/><br/><b style=\"color: blue;\">CREATE", "<br/><b style=\"color: blue;\">CREATE") ;
 		textFinal = textFinal.replace("<b>)</b>;<br/><br/>", "<b>)</b>;<br/>" ) ;
