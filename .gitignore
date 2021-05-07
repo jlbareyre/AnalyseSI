@@ -4,6 +4,7 @@
 .project
 .classpath
 .project
+.vscode
 /build
 /bin
 /doc
