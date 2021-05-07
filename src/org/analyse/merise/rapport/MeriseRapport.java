@@ -35,6 +35,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 
 import org.analyse.core.util.Utilities;
@@ -45,7 +46,8 @@ import org.analyse.merise.mcd.composant.MPDComponent;
 import org.analyse.merise.sql.SQLCommand;
 import org.analyse.core.util.Constantes ;
 
-import com.sun.imageio.plugins.png.PNGImageWriter;
+/* Yalou! - 2021 PNGImageWriter remplacé par ImageIO.write */
+//import com.sun.imageio.plugins.png.PNGImageWriter;
 
 public class MeriseRapport
 {
@@ -181,13 +183,16 @@ public class MeriseRapport
 
         mcd.paintComponent(g2d);
 
+        /* Yalou! - 2021 PNGImageWriter remplacé par ImageIO.write */
+        ImageIO.write(img, "PNG", imageFile);
+        /*
         PNGImageWriter writer = new PNGImageWriter(null);
-
         writer.setOutput(outputStream = new FileImageOutputStream(
                 imageFile));
         writer.write(img);
         outputStream.close();
         writer.dispose();
+        */
 
         out.println("<br/><br/>");
 		out.println("<h3>Modèle Conceptuel de données</h3>");
@@ -212,11 +217,15 @@ public class MeriseRapport
 
         mpd.paintComponent(g2d);
 
+        /* Yalou! - 2021 PNGImageWriter remplacé par ImageIO.write */
+        ImageIO.write(img, "PNG", imageFile);
+        /*
         writer = new PNGImageWriter(null);
         writer.setOutput(outputStream = new FileImageOutputStream(imageFile));
         writer.write(img);
         outputStream.close();
         writer.dispose();
+        */
 
         out.println("<br/><br/>");
 		out.println("<h3>Modèle physique de données</h3>");

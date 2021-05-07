@@ -34,6 +34,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -53,7 +54,8 @@ import org.analyse.core.util.save.FileChooserFilter;
 import org.analyse.main.Main;
 import org.analyse.merise.mcd.composant.MPDComponent;
 
-import com.sun.imageio.plugins.png.PNGImageWriter;
+/* Yalou! - 2021 PNGImageWriter remplacé par ImageIO.write */
+//import com.sun.imageio.plugins.png.PNGImageWriter;
 
 public class MPDPanel extends AnalysePanel
 {
@@ -199,15 +201,16 @@ public class MPDPanel extends AnalysePanel
 
                     mpdComponent.paintComponent(g2d);
 
+                    /* Yalou! - 2021 PNGImageWriter remplacé par ImageIO.write */
+                    ImageIO.write(img, "PNG", imageFile);                    
+                    /*
                     PNGImageWriter writer = new PNGImageWriter(null);
-
                     writer.setOutput(outputStream = new FileImageOutputStream(
                             imageFile));
                     writer.write(img);
-
                     outputStream.close();
-
                     writer.dispose();
+                    */
 
                 } catch (IOException err) {
                     GUIUtilities.error("Impossible de sauvegarder le fichier "
